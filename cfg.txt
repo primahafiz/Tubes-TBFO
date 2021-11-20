@@ -1,9 +1,9 @@
 Terminal:
-True False class is return None continue pass break for def from import while and or not with as if elif else in raise space string number
+True False class is return None continue pass break for def from import while and or not with as if elif else in raise space string number + - * / = ( ) > < %
 Variable:
-S VAR VAROPS FORLOOP RANGE WHILELOOP EXPRESSION IMPORT RETURN WITH DEF FUNCTION PRINT INBRACKET OPERATOR OPERATORBOOL OPERATORCOMPARISON BOOL IF ELIF ELSE INBRACKET STRING CLASS METHOD
+S VAR VAROPS FORLOOP RANGE WHILELOOP EXPRESSION IMPORT RETURN WITH DEF FUNCTION PRINT INBRACKET OPERATOR OPERATORBOOL OPERATORCOMPARISON BOOL IF ELIF ELSE INBRACKET STRING CLASS METHOD COMMENT
 Rules:
-S -> VAR = VAROPS | VAR + = VAROPS | VAR - = VAROPS | VAR * = VAROPS | VAR / = VAROPS | VAR % = VAROPS | FORLOOP | WHILELOOP | IF | ELIF | ELSE | IMPORT | WITH | DEF | FUNCTION | PRINT
+S -> VAR = VAROPS | VAR + = VAROPS | VAR - = VAROPS | VAR * = VAROPS | VAR / = VAROPS | VAR % = VAROPS | FORLOOP | WHILELOOP | IF | ELIF | ELSE | IMPORT | WITH | DEF | FUNCTION | PRINT | COMMENT | RAISE
 VAR -> variable
 OPERATOR -> + | - | * | / | * * | / / | %
 OPERATORBOOL -> and | or
@@ -16,11 +16,11 @@ BOOL -> True | False
 EXPRESSION -> BOOL | VAROPS OPERATORCOMPARISON VAROPS | VAR OPERATORBOOL VAR
 WHILELOOP -> while EXPRESSION :
 IMPORT -> from VAR import VAR as VAR | from VAR import * | import VAR as VAR
-RETURN -> return EXPRESSION | return VAR
-STRING -> ' string '
-WITH -> with open ( STRING , STRING ) as VAR
+RETURN -> return EXPRESSION | return VAROPS
+STRING -> ' string ' | " string "
+WITH -> with open INBRACKET as VAR
 INPUTFUNC -> VAR | INPUTFUNC , INPUTFUNC
-FUNCTION -> VAR ( INPUTFUNC )
+FUNCTION -> VAR (  ) | VAR ( INPUTFUNC )
 DEF -> def FUNCTION :
 PRINT -> print ( STRING )
 IF -> if EXPRESSION :
@@ -28,3 +28,5 @@ ELIF -> elif EXPRESSION :
 ELSE -> else :
 CLASS -> class VAR :
 METHOD -> VAR . FUNCTION
+COMMENT -> ' ' ' string ' ' ' | " " " string " " "
+RAISE -> raise INBRACKET
