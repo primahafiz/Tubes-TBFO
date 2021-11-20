@@ -137,6 +137,8 @@ def delTermVar(T,V,R):
     while repeat:
         if termVar(V,R):
             for i in range (len(R)):
+                if I == 48:
+                    print (R[i])
                 if (len(R[i][1]) == 2):
                     if (R[i][1][0] in T) and (R[i][1][1] in V):
                         if (("['" + str(R[i][1][0]) + "']" in hash)):
@@ -168,7 +170,7 @@ def delTermVar(T,V,R):
                         if (("['" + str(R[i][1][1]) + "']" in hash)):
                             R[i][1][1] = hash["['" + str(R[i][1][1]) + "']"]
                         else:
-                            hash["[" + str(R[i][1][1]) + "]"] = 'V' + str(I)
+                            hash["['" + str(R[i][1][1]) + "']"] = 'V' + str(I)
                             R.append(('V' + str(I), [R[i][1][1]]))
                             R[i][1][1] = 'V' + str(I)
                             V = ['V' + str(I)] + V
@@ -200,12 +202,12 @@ def delUnit(T,V,R):
 def writeRules(R):
     file = open("cnf.txt", 'w')
     dictionary = {}
+    result = ""
     for rule in R:
         if rule[0] in dictionary:
             dictionary[rule[0]] += ' | '+' '.join(rule[1])
         else:
             dictionary[rule[0]] = ' '.join(rule[1])
-    result = ""
     for key in dictionary:
         result += key + " -> " + dictionary[key]+"\n"
     for i in range (len(result)):
@@ -225,5 +227,7 @@ else:
 (V,R) = first(V,R)
 (V,R) = delRightMoreThanTwo(T,V,R)
 (V,R) = delTermVar(T,V,R)
+for rules in R:
+    print (rules)
 (V,R) = delUnit(T,V,R)
 writeRules(R)
