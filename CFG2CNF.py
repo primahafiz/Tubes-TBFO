@@ -42,8 +42,19 @@ def termVar(V,R):
     while ((not found) and (i < len(R))):
         if (len(R[i][1]) == 2):
             if not ((R[i][1][0] in V) and (R[i][1][1] in V)):
-                print(R[i])
-                print(R[i][1])
+                found = True
+            else:
+                i += 1
+        else:
+            i += 1
+    return found
+
+def unit(V,R):
+    i = 0
+    found = False
+    while ((not found) and (i < len(R))):
+        if (len(R[i][1]) == 1):
+            if ((R[i][1][0] in V) and not(R[i][1][0] == 'S')):
                 found = True
                 break
             else:
@@ -64,19 +75,25 @@ def delRightMoreThanTwo(T,V,R):
             leftR.append(rules[0])
 
 
-    two = True
-    while two:
+    repeat = True
+    while repeat:
         if moreThanTwo(R):
             for rules in R:
                 if ((rules[1][0] not in T) or (len(rules[1]) > 1)):
                     if (len(rules[1]) > 2):
-                        firstRule = (rules[0], ['V'+ str(I), 'V' + str(I+1)])
-                        secondRule = ('V'+ str(I), [])
-                        thirdRule = ('V'+ str(I+1), [])
+                        if (len(rules[1]) == 3) and (rules[1][2] in leftR):
+                            firstRule = (rules[0], ['V'+ str(I), rules[1][2]])
+                            secondRule = ('V'+ str(I), [])
+                            three = True
+                        else:
+                            firstRule = (rules[0], ['V'+ str(I), 'V' + str(I+1)])
+                            secondRule = ('V'+ str(I), [])
+                            thirdRule = ('V'+ str(I+1), [])
+                            three = False
                         for i in range (len(rules[1])):
                             if (i < 2):
                                 secondRule[1].append(rules[1][i])
-                            else:
+                            elif not three:
                                 thirdRule[1].append(rules[1][i])
                         R.remove(rules)
                         if (str(secondRule[1]) in hash):
@@ -88,25 +105,27 @@ def delRightMoreThanTwo(T,V,R):
                             if (secondRule[0] not in leftR):
                                 hash[str(secondRule[1])] = secondRule[0]
                             second = True
-                        if (str(thirdRule[1]) in hash):
-                            firstRule[1][1] = hash[str(thirdRule[1])]
-                            third = False
-                        else:
-                            if (thirdRule[0] not in leftR):
-                                hash[str(thirdRule[1])] = thirdRule[0]
-                            third = True
+                        if not three:
+                            if (str(thirdRule[1]) in hash):
+                                firstRule[1][1] = hash[str(thirdRule[1])]
+                                third = False
+                            else:
+                                if (thirdRule[0] not in leftR):
+                                    hash[str(thirdRule[1])] = thirdRule[0]
+                                third = True
                         R.append(firstRule)
                         if second:
                             R.append(secondRule)
                             V = [secondRule[0]] + V
                             I += 1
-                        if third:
-                            R.append(thirdRule)
-                            V = [thirdRule[0]] + V
-                            I += 1
+                        if not three:
+                            if third:
+                                R.append(thirdRule)
+                                V = [thirdRule[0]] + V
+                                I += 1
 
         else:
-            two = False
+            repeat = False
     return (V,R)
 
 def delTermVar(T,V,R):
@@ -120,34 +139,34 @@ def delTermVar(T,V,R):
             for i in range (len(R)):
                 if (len(R[i][1]) == 2):
                     if (R[i][1][0] in T) and (R[i][1][1] in V):
-                        if (("[" + str(R[i][1][0]) + "]" in hash)):
-                            R[i][1][0] = hash["[" + str(R[i][1][0]) + "]"]
+                        if (("['" + str(R[i][1][0]) + "']" in hash)):
+                            R[i][1][0] = hash["['" + str(R[i][1][0]) + "']"]
                         else:
-                            hash["[" + str(R[i][1][0]) + "]"] = 'V' + str(I)
+                            hash["['" + str(R[i][1][0]) + "']"] = 'V' + str(I)
                             R.append(('V' + str(I), [R[i][1][0]]))
                             R[i][1][0] = 'V' + str(I)
                             V = ['V' + str(I)] + V
                             I += 1
                     elif (R[i][1][1] in T) and (R[i][1][0] in V):
-                        if (("[" + str(R[i][1][1]) + "]" in hash)):
-                            R[i][1][1] = hash["[" + str(R[i][1][1]) + "]"]
+                        if (("['" + str(R[i][1][1]) + "']" in hash)):
+                            R[i][1][1] = hash["['" + str(R[i][1][1]) + "']"]
                         else:
-                            hash["[" + str(R[i][1][1]) + "]"] = 'V' + str(I)
+                            hash["['" + str(R[i][1][1]) + "']"] = 'V' + str(I)
                             R.append(('V' + str(I), [R[i][1][1]]))
                             R[i][1][1] = 'V' + str(I)
                             V = ['V' + str(I)] + V
                             I += 1
                     elif (R[i][1][1] in T) and (R[i][1][0] in T):
-                        if (("[" + str(R[i][1][0]) + "]" in hash)):
-                            R[i][1][0] = hash["[" + str(R[i][1][0]) + "]"]
+                        if (("['" + str(R[i][1][0]) + "']" in hash)):
+                            R[i][1][0] = hash["['" + str(R[i][1][0]) + "']"]
                         else:
-                            hash["[" + str(R[i][1][0]) + "]"] = 'V' + str(I)
+                            hash["['" + str(R[i][1][0]) + "']"] = 'V' + str(I)
                             R.append(('V' + str(I), [R[i][1][0]]))
                             R[i][1][0] = 'V' + str(I)
                             V = ['V' + str(I)] + V
                             I += 1
-                        if (("[" + str(R[i][1][1]) + "]" in hash)):
-                            R[i][1][1] = hash["[" + str(R[i][1][1]) + "]"]
+                        if (("['" + str(R[i][1][1]) + "']" in hash)):
+                            R[i][1][1] = hash["['" + str(R[i][1][1]) + "']"]
                         else:
                             hash["[" + str(R[i][1][1]) + "]"] = 'V' + str(I)
                             R.append(('V' + str(I), [R[i][1][1]]))
@@ -157,12 +176,45 @@ def delTermVar(T,V,R):
         else:
             repeat = False
 
-    print(V)
     return(V,R)
 
+def delUnit(T,V,R):
+    global I
+    global hash
+    global leftR
 
+    repeat = True
+    while repeat:
+        if unit(V,R):
+            for i in range (len(R)):
+                if (len(R[i][1]) == 1) and (R[i][1][0] in V) and not(R[i][1][0] == 'S'):
+                    temp = R[i]
+                    R.remove(R[i])
+                    for rules in R:
+                        if (temp[1][0] == rules[0]):
+                            R.append((temp[0], rules[1]))
+        else:
+            repeat = False
+    return (V,R)
 
-
+def writeRules(R):
+    file = open("cnf.txt", 'w')
+    dictionary = {}
+    for rule in R:
+        if rule[0] in dictionary:
+            dictionary[rule[0]] += ' | '+' '.join(rule[1])
+        else:
+            dictionary[rule[0]] = ' '.join(rule[1])
+    result = ""
+    for key in dictionary:
+        result += key + " -> " + dictionary[key]+"\n"
+    for i in range (len(result)):
+        if i == (len(result) - 1):
+            file.write(result[i].rstrip())
+        else:
+            file.write(result[i])
+            
+    file.close()
 
 if len(sys.argv) > 1:
     path = str(sys.argv[1])
@@ -172,6 +224,6 @@ else:
 (T,V,R) = loadAll(path)
 (V,R) = first(V,R)
 (V,R) = delRightMoreThanTwo(T,V,R)
-delTermVar(T,V,R)
-for rules in R:
-    print (rules)
+(V,R) = delTermVar(T,V,R)
+(V,R) = delUnit(T,V,R)
+writeRules(R)
