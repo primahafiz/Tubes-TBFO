@@ -3,6 +3,8 @@ import sys
 T = []
 V = []
 R = [[]]
+leftR = []
+hash = {}
 I = 0
 
 def loadAll(path):
@@ -25,22 +27,42 @@ def first(V,R):
     return (V,R)
 
 def moreThanTwo(R):
-    ii = 0
+    i = 0
     found = False
-    while ((not found) and (ii < len(R))):
-        if len(R[ii][1]) > 2:
+    while ((not found) and (i < len(R))):
+        if len(R[i][1]) > 2:
             found = True
         else:
-            ii += 1
+            i += 1
     return found
+
+def termVar(V,R):
+    i = 0
+    found = False
+    while ((not found) and (i < len(R))):
+        if (len(R[i][1]) == 2):
+            if not ((R[i][1][0] in V) and (R[i][1][1] in V)):
+                print(R[i])
+                print(R[i][1])
+                found = True
+                break
+            else:
+                i += 1
+        else:
+            i += 1
+    return found
+
 
 def delRightMoreThanTwo(T,V,R):
     global I
+    global hash
+    global leftR
 
-    hash = {}
-    for i in range(len(R)):
-        if (len(R[i][1]) == 1) and (R[i][1] in T):
-            hash[str(R[i][1])] = R[i][0]
+    leftR = []
+    for rules in R:
+        if rules[0] not in leftR:
+            leftR.append(rules[0])
+
 
     two = True
     while two:
@@ -58,18 +80,19 @@ def delRightMoreThanTwo(T,V,R):
                                 thirdRule[1].append(rules[1][i])
                         R.remove(rules)
                         if (str(secondRule[1]) in hash):
-                            firstRule[1][1] = hash[str(secondRule[1])]
+                            firstRule[1][0] = hash[str(secondRule[1])]
+                            firstRule[1][1] = 'V' + str(I)
                             thirdRule = ('V'+ str(I), thirdRule[1])
                             second = False
                         else:
-                            if (len(secondRule[1]) == 1) and (secondRule[1][0] in T):
+                            if (secondRule[0] not in leftR):
                                 hash[str(secondRule[1])] = secondRule[0]
                             second = True
                         if (str(thirdRule[1]) in hash):
                             firstRule[1][1] = hash[str(thirdRule[1])]
                             third = False
                         else:
-                            if (len(thirdRule[1]) == 1) and (thirdRule[1][0] in T):
+                            if (thirdRule[0] not in leftR):
                                 hash[str(thirdRule[1])] = thirdRule[0]
                             third = True
                         R.append(firstRule)
@@ -86,6 +109,59 @@ def delRightMoreThanTwo(T,V,R):
             two = False
     return (V,R)
 
+def delTermVar(T,V,R):
+    global I
+    global hash
+    global leftR
+
+    repeat = True
+    while repeat:
+        if termVar(V,R):
+            for i in range (len(R)):
+                if (len(R[i][1]) == 2):
+                    if (R[i][1][0] in T) and (R[i][1][1] in V):
+                        if (("[" + str(R[i][1][0]) + "]" in hash)):
+                            R[i][1][0] = hash["[" + str(R[i][1][0]) + "]"]
+                        else:
+                            hash["[" + str(R[i][1][0]) + "]"] = 'V' + str(I)
+                            R.append(('V' + str(I), [R[i][1][0]]))
+                            R[i][1][0] = 'V' + str(I)
+                            V = ['V' + str(I)] + V
+                            I += 1
+                    elif (R[i][1][1] in T) and (R[i][1][0] in V):
+                        if (("[" + str(R[i][1][1]) + "]" in hash)):
+                            R[i][1][1] = hash["[" + str(R[i][1][1]) + "]"]
+                        else:
+                            hash["[" + str(R[i][1][1]) + "]"] = 'V' + str(I)
+                            R.append(('V' + str(I), [R[i][1][1]]))
+                            R[i][1][1] = 'V' + str(I)
+                            V = ['V' + str(I)] + V
+                            I += 1
+                    elif (R[i][1][1] in T) and (R[i][1][0] in T):
+                        if (("[" + str(R[i][1][0]) + "]" in hash)):
+                            R[i][1][0] = hash["[" + str(R[i][1][0]) + "]"]
+                        else:
+                            hash["[" + str(R[i][1][0]) + "]"] = 'V' + str(I)
+                            R.append(('V' + str(I), [R[i][1][0]]))
+                            R[i][1][0] = 'V' + str(I)
+                            V = ['V' + str(I)] + V
+                            I += 1
+                        if (("[" + str(R[i][1][1]) + "]" in hash)):
+                            R[i][1][1] = hash["[" + str(R[i][1][1]) + "]"]
+                        else:
+                            hash["[" + str(R[i][1][1]) + "]"] = 'V' + str(I)
+                            R.append(('V' + str(I), [R[i][1][1]]))
+                            R[i][1][1] = 'V' + str(I)
+                            V = ['V' + str(I)] + V
+                            I += 1
+        else:
+            repeat = False
+
+    print(V)
+    return(V,R)
+
+
+
 
 
 if len(sys.argv) > 1:
@@ -96,5 +172,6 @@ else:
 (T,V,R) = loadAll(path)
 (V,R) = first(V,R)
 (V,R) = delRightMoreThanTwo(T,V,R)
+delTermVar(T,V,R)
 for rules in R:
-    print(rules)
+    print (rules)
