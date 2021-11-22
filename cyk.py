@@ -22,12 +22,12 @@ def LoadCNF(cnfPath): # mengembalikan dictionary {Body : [head1, head2, ..]}
 def cyk(tokens, chomskyDict):
     n = len(tokens)
     print(n)
-    cykTable = [[[] for j in range(n-i)] for i in range(n)]
+    cykTable = [[set() for j in range(n-i)] for i in range(n)]
 
     #inisialisasi cykTable[0] berisi variable dengan ruas kanan rule terminal i
     for i in range(n):
         if(chomskyDict.get(tokens[i])!=None):
-            cykTable[0][i] = chomskyDict[tokens[i]]
+            cykTable[0][i] = set(chomskyDict[tokens[i]])
     
     for i in range(1,n): # tinggi i+1
         for j in range(n-i):
@@ -36,8 +36,13 @@ def cyk(tokens, chomskyDict):
                 for var1 in cykTable[k][j]:
                     for var2 in cykTable[i-k-1][j+k+1]:
                         if(chomskyDict.get(var1+var2)!=None):
-                            cykTable[i][j] += chomskyDict[var1+var2]
+                            cykTable[i][j].update(chomskyDict[var1+var2])
     
+    for i in range(n):
+        for j in range(n-i):
+            if(len(cykTable[i][j])==0):
+                cykTable[i][j] = list()
+
     return cykTable
 
 def verdict(cykTable):
