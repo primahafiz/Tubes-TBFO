@@ -1,9 +1,9 @@
 Terminal:
-True False variable class is return None continue pass break for def from import while and or not with as if elif else range print open in raise space string number + - * / = ( ) > < % : ' " , .
+True False variable class is return None continue pass break for def from import while and or not with as if elif else range print open in raise space string number newline + - * / = ( ) > < % : ' " , .
 Variable:
 S VAR VAROPS FORLOOP RANGE WHILELOOP EXPRESSION IMPORT RETURN WITH DEF FUNCTION PRINT INBRACKET OPERATOR OPERATORBOOL OPERATORCOMPARISON BOOL IF ELIF ELSE INBRACKET STRING CLASS METHOD COMMENT INPUTFUNC RAISE
 Rules:
-S -> VAR = VAROPS | VAR + = VAROPS | VAR - = VAROPS | VAR * = VAROPS | VAR / = VAROPS | VAR % = VAROPS | FORLOOP | WHILELOOP | IF | ELIF | ELSE | IMPORT | WITH | DEF | FUNCTION | PRINT | COMMENT | RAISE
+S -> S newline S | VAR = VAROPS | VAR + = VAROPS | VAR - = VAROPS | VAR * = VAROPS | VAR / = VAROPS | VAR % = VAROPS | FORLOOP | WHILELOOP | IF | ELIF | ELSE | IMPORT | WITH | DEF | FUNCTION | PRINT | COMMENT | RAISE
 VAR -> variable
 OPERATOR -> + | - | * | / | * * | / / | %
 OPERATORBOOL -> and | or
