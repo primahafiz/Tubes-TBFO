@@ -9,7 +9,7 @@ def main_parser(file):
     ops=[r'\+','-',r'\*',r'\\','<','>','=','%',r'\'',r'\"',r'\(',r'\)',':','\n']
     temp=[]
     results=re.split(" +",read_file)
-    print(results)
+    # print(results)
     lines=results
     for op in ops:
         for content in lines:
@@ -20,7 +20,7 @@ def main_parser(file):
                     temp.append(split_string)
         lines=temp
         temp=[]
-    print(lines)
+    # print(lines)
     # print(lines)
 
     newline='\n'
@@ -38,7 +38,7 @@ def main_parser(file):
             lines[i]='number'
         elif(newline_pattern.match(lines[i])):
             lines[i]='newline'
-    print(lines)
+    # print(lines)
     return lines
 
             
