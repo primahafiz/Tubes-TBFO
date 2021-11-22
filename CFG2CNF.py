@@ -10,7 +10,7 @@ I = 0
 def loadAll(path):
     R = []
     file = open(path).read()
-    K = (file.split("Variable:\n")[0].replace("Terminal:\n","").replace("\n","")).split(' ')
+    T = (file.split("Variable:\n")[0].replace("Terminal:\n","").replace("\n","")).split(' ')
     V = (file.split("Rules:\n")[0].split("Variable:\n")[1].replace("Variable:\n","").replace("\n","")).split(' ')
     RArray = (file.split("Rules:\n")[1]).split('\n')
     for i in range(len(RArray)):
@@ -19,7 +19,7 @@ def loadAll(path):
         for j in range(len(rightRule)):
             R.append( (leftRule, rightRule[j].split(' ')) )
 
-    return (K,V,R)
+    return (T,V,R)
 
 def first(V,R):
     V = ['S0'] + V
@@ -137,8 +137,6 @@ def delTermVar(T,V,R):
     while repeat:
         if termVar(V,R):
             for i in range (len(R)):
-                if I == 48:
-                    print (R[i])
                 if (len(R[i][1]) == 2):
                     if (R[i][1][0] in T) and (R[i][1][1] in V):
                         if (("['" + str(R[i][1][0]) + "']" in hash)):
@@ -227,7 +225,5 @@ else:
 (V,R) = first(V,R)
 (V,R) = delRightMoreThanTwo(T,V,R)
 (V,R) = delTermVar(T,V,R)
-for rules in R:
-    print (rules)
 (V,R) = delUnit(T,V,R)
 writeRules(R)
