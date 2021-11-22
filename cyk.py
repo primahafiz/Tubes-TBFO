@@ -41,4 +41,4 @@ def cyk(tokens, chomskyDict):
     return cykTable
 
 def verdict(cykTable):
-    return ('S0' in cykTable[-1][0])
+    return ('S' in cykTable[-1][0])
