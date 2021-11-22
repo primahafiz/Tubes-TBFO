@@ -6,7 +6,7 @@ def main_parser(file):
     f=open(file,'r')
     read_file=f.read()
     f.close()
-    ops=[r'\+','-',r'\*',r'\\','<','>','=','%',r'\'',r'\"',r'\(',r'\)',':','\n',r'\.',',']
+    ops=[r'\+','-',r'\*',r'\\','<','>','=','%',r'\'',r'\"',r'\(',r'\)',':','\n',r'\.',',',r'\[',r'\]']
     temp=[]
     results=re.split(" +",read_file)
     # print(results)
