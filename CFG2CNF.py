@@ -187,7 +187,7 @@ def delUnit(T,V,R):
     while repeat:
         if unit(V,R):
             for i in range (len(R)):
-                if (len(R[i][1]) == 1) and (R[i][1][0] in V) and not(R[i][1][0] == 'S'):
+                if (len(R[i][1]) == 1) and (R[i][1][0] in V):
                     temp = R[i]
                     R.remove(R[i])
                     for rules in R:
