@@ -2,6 +2,23 @@ import re
 
 terminal=["True", "False", "variable", "class", "is", "return", "None", "continue", "pass", "break", "for", "def", "from", "import", "while", "and", "or", "not", "with", "as", "if", "elif", "else", "range", "print", "open", "in", "raise", "space", "string", "number", "+", "-", "*", "/", "=", "(", ")", ">", "<", "%", ":", "'", '"', ",", "."]
 
+def conditional_validation(lines):
+    conditions=[]
+    for content in lines:
+        if(content=='if' or content=='elif' or content=='else'):
+            conditions.append(content)
+    cur_state=0
+    for condition in conditions:
+        if condition=='if':
+            cur_state+=1
+        elif condition=='elif' and cur_state>1:
+            continue
+        elif condition=='else' and cur_state>0:
+            cur_state-=1
+        else:
+            return False
+    return True
+
 def main_parser(file):
     f=open(file,'r')
     read_file=f.read()
@@ -40,8 +57,6 @@ def main_parser(file):
             lines[i]='newline'
     # print(lines)
     return lines
-
-            
 
 file="input.txt"
 main_parser(file)

@@ -14,17 +14,16 @@ print(tokens)
 print(len(tokens))
 print("abis tokenized")
 
+# Validasi if elif else
+isConditionValid=lexer.conditional_validation(tokens)
+
 # CYK
 cykTable = cyk.cyk(tokens, chomskyDict)
 
 for row in cykTable:
     print(row)
 
-if(cyk.verdict(cykTable)):
+if(cyk.verdict(cykTable) and isConditionValid):
     print("Accepted")
 else:
     print("Syntax Error")
-    
-
-
-
