@@ -3,8 +3,8 @@ def unit(V,R):
     found = False
     a=[1,23,4,5]
     for x in a:
-        if (len(R[i][1]) == 1):
-            x+=1 
+        elif (len(R[i][1]) == 1):
+            x | 1 
 
 
             
