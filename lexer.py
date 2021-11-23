@@ -11,7 +11,7 @@ def conditional_validation(lines):
     for condition in conditions:
         if condition=='if':
             cur_state+=1
-        elif condition=='elif' and cur_state>1:
+        elif condition=='elif' and cur_state>0:
             continue
         elif condition=='else' and cur_state>0:
             cur_state-=1
