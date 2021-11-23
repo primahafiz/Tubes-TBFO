@@ -8,8 +8,8 @@ tokenExprs = [
     [
         r'[ \t]+',
         r'#[^\n]*',
-        r"True", r"False", 
-        r"class", r"is", r"return", r"None", r"continue", r"pass", r"break", r"for", r"def", r"from", r"import", r"while", r"and", r"or", r"not", r"with", r"as", r"if", r"elif", r"else", r"range", r"print", r"open", r"in", r"raise", 
+        r"\bTrue\b", r"\bFalse\b", 
+        r"\bclass\b", r"\bis\b", r"\breturn\b", r"\bNone\b", r"\bcontinue\b", r"\bpass\b", r"\bbreak\b", r"\bfor\b", r"\bdef\b", r"\bfrom\b", r"\bimport\b", r"\bwhile\b", r"\band\b", r"\bor\b", r"\bnot\b", r"\bwith\b", r"\bas\b", r"\bif\b", r"\belif\b", r"\belse\b", r"\brange\b", r"\bprint\b", r"\bopen\b", r"\bin\b", r"\braise\b", 
         r"[a-zA-Z_][a-zA-Z0-9_]*",
         r'\'\'\'[(?!(\'\'\'))\w\W]*\'\'\'',
         r'\"\"\"[(?!(\"\"\"))\w\W]*\"\"\"',

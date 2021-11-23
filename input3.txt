@@ -1,2 +1,2 @@
-if x=='apa':
-    print('apa')
+inb = 4
+print(inb)
