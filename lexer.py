@@ -1,7 +1,7 @@
 import re
 import sys
 
-terminal=[None, None, "True", "False", "class", "is", "return", "None", "continue", "pass", "break", "for", "def", "from", "import", "while", "and", "or", "not", "with", "as", "if", "elif", "else", "range", "print", "open", "in", "raise", "variable", "comment", "comment", "string", "string", "number", "newline", "+", "-", "*", "/", "=", "(", ")", ">", "<", "%", ":", ",", ".", "[", "]"]
+terminal=[None, None, "True", "False", "class", "is", "return", "None", "continue", "pass", "break", "for", "def", "from", "import", "while", "and", "or", "not", "with", "as", "if", "elif", "else", "range", "print", "open", "in", "raise", "variable", "comment", "comment", "string", "string", "number", "newline", "+", "-", "*", "/", "=", "(", ")", ">", "<", "%", ":", ",", ".", "[", "]", "&", "|", "^", "~", "!"]
 
 tokenExprs = [
     terminal,
@@ -31,7 +31,12 @@ tokenExprs = [
         r",", 
         r"\.",
         r"\[",
-        r"\]"
+        r"\]",
+        r'&',
+        r'\|',
+        r"\^",
+        r"~",
+        r'!'
     ]
 ]
 
