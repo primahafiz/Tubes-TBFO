@@ -24,6 +24,7 @@ if(cyk.verdict(cykTable)):
     print("Accepted")
 else:
     print("Syntax Error")
+    
 
 
 
