@@ -1,19 +1,13 @@
-def conditional_validation(lines):
-    '''
-    # cek123 cek cek
-    '''
-    for content in lines:
-        if(content=='if' or content=='elif' or content=='else'):
-            conditions.append(content)
-    cur_state=0
-    for condition in conditions:
-        if condition=='if':
-            cur_state+=1
-        elif condition=='elif' and cur_state>0:
-            continue
-            break
-        elif condition=='else' and cur_state>0:
-            cur_state-=1
+def unit(V,R):
+    i = 0
+    found = False
+    a=[]
+    while ((not found) and (i < len(R))):
+        if (len(R[i][1]) == 1):
+            x+=1 return 2
         else:
-            return False
-    return True
+            i += 1
+        x**=2
+        x*=2
+        farmer=1 if x==5 else 8
+    return found
