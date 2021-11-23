@@ -23,7 +23,7 @@ def main_parser(file):
     f=open(file,'r')
     read_file=f.read()
     f.close()
-    ops=[r'\+','-',r'\*',r'\\','<','>','=','%',r'\'',r'\"',r'\(',r'\)',':','\n',r'\.',',',r'\[',r'\]']
+    ops=[r'\+','-',r'\*',r'\\','<','>','=','%',r'\(',r'\)',':','\n',r'\.',',',r'\[',r'\]']
     temp=[]
     results=re.split(" +",read_file)
     # print(results)
@@ -43,13 +43,19 @@ def main_parser(file):
     newline='\n'
     variable=r"[a-zA-Z_][a-zA-Z0-9_]*"
     number=r"[0-9]+"
+    string1 = r'\"[^\"\n]*\"'
+    string2 = r'\'[^\'\n]*\''
 
     variable_pattern=re.compile(variable)
     number_pattern=re.compile(number)
     newline_pattern=re.compile(newline)
+    string1_pattern=re.compile(string1)
+    string2_pattern=re.compile(string2)
     
     for i in range(len(lines)):
-        if(variable_pattern.match(lines[i]) and (lines[i] not in terminal or lines[i]=='number')):
+        if((string1_pattern.match(lines[i]) or string2_pattern.match(lines[i]))):
+            lines[i] = 'string'
+        elif(variable_pattern.match(lines[i]) and (lines[i] not in terminal or lines[i]=='number')):
             lines[i]='variable'
         elif(number_pattern.match(lines[i])):
             lines[i]='number'
