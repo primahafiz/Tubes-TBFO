@@ -8,7 +8,7 @@ print(chomskyDict)
 print(len(chomskyDict))
 
 # Tokenize
-tokens = lexer.main_parser("inputAcc.txt")
+tokens = lexer.main_parser("input.txt")
 
 print(tokens)
 print(len(tokens))

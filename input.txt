@@ -1,17 +1,29 @@
-def unit(V,R):
-    i = 0
-    found = False
-    while ((not found) and (i < len(R))):
-        if (len(R[i][1]) == 1):
-            if ((R[i][1][0] in V) and not(R[i][1][0] == 5)):
-                found = True
-                continue
-            elif x==5:
-                i += 1
-                break
-        else:
-            i += 1
-        x**=2
-        x*=2
-        farmer=1 if x==5 else 8
-    return found
+import lexer
+import cyk
+
+# Load Chomsky Normal Form
+chomskyDict = cyk.LoadCNF("cnf.txt")
+
+print(chomskyDict)
+print(len(chomskyDict))
+
+# Tokenize
+tokens = lexer.main_parser("input.txt")
+
+print(tokens)
+print(len(tokens))
+print("abis tokenized")
+
+# Validasi if elif else
+IsConditionValid=lexer.conditional_validation(tokens)
+
+# CYK
+cykTable = cyk.cyk(tokens, chomskyDict)
+
+for row in cykTable:
+    print(row)
+
+if(cyk.verdict(cykTable) and IsConditionValid):
+    print("Accepted")
+else:
+    print("Syntax Error")
