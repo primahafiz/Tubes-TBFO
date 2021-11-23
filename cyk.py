@@ -7,8 +7,8 @@ def LoadCNF(cnfPath): # mengembalikan dictionary {Body : [head1, head2, ..]}
     while(len(f_contents)>0):
         f_contents = f_contents.strip()
         head, bodies = f_contents.split(' -> ')
-        bodies = bodies.replace(' ', '') # yang ruas kanannya 2 varaibel bkl jd VAR1VAR2, kalo ga ambigu gpp
-        bodies = bodies.split('|')
+        bodies = bodies.split(' | ')
+        # bodies = bodies.replace(' ', '') # yang ruas kanannya 2 varaibel bkl jd VAR1VAR2, kalo ga ambigu gpp
         for body in bodies:
             if(chomskyDict.get(body)==None):
                 chomskyDict.update({body: [head]})
@@ -35,8 +35,8 @@ def cyk(tokens, chomskyDict):
                 # string[j..j+i], dibentuk dari string[j..j+k] dan string[j+k+1..j+i]
                 for var1 in cykTable[k][j]:
                     for var2 in cykTable[i-k-1][j+k+1]:
-                        if(chomskyDict.get(var1+var2)!=None):
-                            cykTable[i][j].update(chomskyDict[var1+var2])
+                        if(chomskyDict.get(var1+' '+var2)!=None):
+                            cykTable[i][j].update(chomskyDict[var1+' '+var2])
     
     for i in range(n):
         for j in range(n-i):
