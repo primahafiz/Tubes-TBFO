@@ -1,5 +1,5 @@
 Terminal:
-True False variable class is return None continue pass break for def from import while and or not with as if elif else range print open in raise space string number newline + - * / = ( ) > < % : ' " , . # [ ]
+True False variable class is return None continue pass break for def from import while and or not with as if elif else range print open in raise string number newline comment + - * / = ( ) > < % : ' " , . # [ ]
 Variable:
 S VAR VARARR VAROPS FORLOOP RANGE WHILELOOP EXPRESSION IMPORT RETURN WITH DEF FUNCTION PRINT INBRACKET OPERATOR OPERATORBOOL OPERATORCOMPARISON BOOL IF ELIF ELSE INBRACKET STRING CLASS METHOD COMMENT INPUTFUNC RAISE NEWLINE INBRACKETEXPRESSION VARARR MERGEVAROPS MERGEEXPRESSION ONELINERIF CONTROLLOOP FORLOOPCONTROL DEFRETURN FORLOOPMULTICONTROL MULTICONTROLLOOP WHILELOOPCONTROL WHILELOOPMULTICONTROL DEFMULTIRETURN MULTIRETURN
 Rules:
@@ -11,7 +11,7 @@ BOOL -> True | False | not BOOL
 OPERATOR -> + | - | * | / | * * | / / | %
 OPERATORBOOL -> and | or
 OPERATORCOMPARISON -> < | > | < = | > = | = = | is | in | not in | is not
-VAROPS -> VAR | VARARR | number | string | BOOL | FUNCTION | METHOD | VAROPS OPERATOR VAROPS | MERGEEXPRESSION
+VAROPS -> VAR | VARARR | number | STRING | BOOL | FUNCTION | METHOD | VAROPS OPERATOR VAROPS | MERGEEXPRESSION
 INBRACKET -> ( INBRACKET ) | ( VAROPS )
 MERGEVAROPS -> VAROPS | INBRACKET
 RANGE -> range INBRACKET
@@ -26,7 +26,7 @@ WHILELOOPCONTROL -> WHILELOOP S CONTROLLOOP | WHILELOOP S CONTROLLOOP | WHILELOO
 WHILELOOPMULTICONTROL -> WHILELOOP MULTICONTROLLOOP
 IMPORT -> from VAR import VAR as VAR | from VAR import * | import VAR as VAR
 RETURN -> return MERGEVAROPS | return MERGEEXPRESSION | return
-STRING -> ' string ' | " string " | STRING + STRING | string
+STRING -> string | STRING string
 WITH -> with open INBRACKET as VAR
 INPUTFUNC -> VAROPS | INPUTFUNC , INPUTFUNC
 FUNCTION -> VAR ( ) | VAR ( INPUTFUNC )
@@ -40,7 +40,7 @@ ELSE -> else :
 ONELINERIF -> VAR = VAROPS if MERGEEXPRESSION else VAROPS
 CLASS -> class VAR :
 METHOD -> VAR . FUNCTION
-COMMENT -> ' ' ' string ' ' ' | " " " string " " " | # string
+COMMENT -> comment
 RAISE -> raise INBRACKET
 CONTROLLOOP -> pass | break | continue
 MULTICONTROLLOOP -> S CONTROLLOOP | MULTICONTROLLOOP NEWLINE MULTICONTROLLOOP

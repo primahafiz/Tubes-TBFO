@@ -1,6 +1,39 @@
 import re
+import sys
 
-terminal=["True", "False", "variable", "class", "is", "return", "None", "continue", "pass", "break", "for", "def", "from", "import", "while", "and", "or", "not", "with", "as", "if", "elif", "else", "range", "print", "open", "in", "raise", "space", "string", "number", "+", "-", "*", "/", "=", "(", ")", ">", "<", "%", ":", "'", '"', ",", "."]
+terminal=[None, None, "True", "False", "class", "is", "return", "None", "continue", "pass", "break", "for", "def", "from", "import", "while", "and", "or", "not", "with", "as", "if", "elif", "else", "range", "print", "open", "in", "raise", "variable", "comment", "comment", "string", "string", "number", "newline", "+", "-", "*", "/", "=", "(", ")", ">", "<", "%", ":", ",", ".", "[", "]"]
+
+tokenExprs = [
+    terminal,
+    [
+        r'[ \t]+',
+        r'#[^\n]*',
+        r"True", r"False", 
+        r"class", r"is", r"return", r"None", r"continue", r"pass", r"break", r"for", r"def", r"from", r"import", r"while", r"and", r"or", r"not", r"with", r"as", r"if", r"elif", r"else", r"range", r"print", r"open", r"in", r"raise", 
+        r"[a-zA-Z_][a-zA-Z0-9_]*",
+        r'\'\'\'[(?!(\'\'\'))\w\W]*\'\'\'',
+        r'\"\"\"[(?!(\"\"\"))\w\W]*\"\"\"',
+        r'\"[^\"\n]*\"', 
+        r'\'[^\'\n]*\'',
+        r"[0-9]+",
+        r'\n', 
+        r'\+', 
+        r"\-", 
+        r"\*", 
+        r"/", 
+        r"=", 
+        r"\(", 
+        r"\)", 
+        r">", 
+        r"<", 
+        r"%", 
+        r"\:", 
+        r",", 
+        r"\.",
+        r"\[",
+        r"\]"
+    ]
+]
 
 def conditional_validation(lines):
     conditions=[]
@@ -23,46 +56,27 @@ def main_parser(file):
     f=open(file,'r')
     read_file=f.read()
     f.close()
-    ops=[r'\+','-',r'\*',r'\\','<','>','=','%',r'\(',r'\)',':','\n',r'\.',',',r'\[',r'\]']
-    temp=[]
-    results=re.split(" +",read_file)
-    # print(results)
-    lines=results
-    for op in ops:
-        for content in lines:
-            formats=r"("+op+r")"
-            split_res=re.split(formats,content)
-            for split_string in split_res:
-                if(split_string!=''):
-                    temp.append(split_string)
-        lines=temp
-        temp=[]
-    # print(lines)
-    # print(lines)
+    # ops=[r'\+','-',r'\*',r'\\','<','>','=','%',r'\(',r'\)',':','\n',r'\.',',',r'\[',r'\]']
+    tokens=[]
+    pos = 0
+    while(pos<len(read_file)):
+        match = None
+        for i in range(len(tokenExprs[0])):
+            pattern = tokenExprs[1][i]
+            tag = tokenExprs[0][i]
+            regex = re.compile(pattern)
+            match = regex.match(read_file, pos)
+            if match:
+                if tag:
+                    tokens.append(tag)
+                break
+        if not match:
+            print(tokens)
+            print("Syntax Error")
+            sys.exit(1)
+        else:
+            pos = match.end(0)
+    return tokens
 
-    newline='\n'
-    variable=r"[a-zA-Z_][a-zA-Z0-9_]*"
-    number=r"[0-9]+"
-    string1 = r'\"[^\"\n]*\"'
-    string2 = r'\'[^\'\n]*\''
-
-    variable_pattern=re.compile(variable)
-    number_pattern=re.compile(number)
-    newline_pattern=re.compile(newline)
-    string1_pattern=re.compile(string1)
-    string2_pattern=re.compile(string2)
-    
-    for i in range(len(lines)):
-        if((string1_pattern.match(lines[i]) or string2_pattern.match(lines[i]))):
-            lines[i] = 'string'
-        elif(variable_pattern.match(lines[i]) and (lines[i] not in terminal or lines[i]=='number')):
-            lines[i]='variable'
-        elif(number_pattern.match(lines[i])):
-            lines[i]='number'
-        elif(newline_pattern.match(lines[i])):
-            lines[i]='newline'
-    # print(lines)
-    return lines
-
-file="input.txt"
-main_parser(file)
+# file="input.txt"
+# main_parser(file)
