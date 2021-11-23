@@ -2,30 +2,35 @@ import lexer
 import cyk
 import sys
 
-# Load Chomsky Normal Form
-chomskyDict = cyk.LoadCNF("cnf.txt")
+if len(sys.argv) > 1:
+    path = str(sys.argv[1])
 
-print(chomskyDict)
-print(len(chomskyDict))
+    # Load Chomsky Normal Form
+    chomskyDict = cyk.LoadCNF("cnf.txt")
 
-# Tokenize
-tokens = lexer.main_parser("main.txt")
+    print(chomskyDict)
+    print(len(chomskyDict))
 
-print(tokens)
-print(len(tokens))
-print("abis tokenized")
+    # Tokenize
+    tokens = lexer.main_parser(path)
+
+    print(tokens)
+    print(len(tokens))
+    print("abis tokenized")
 
 
-# Validasi if elif else
-isConditionValid=lexer.conditional_validation(tokens)
+    # Validasi if elif else
+    isConditionValid=lexer.conditional_validation(tokens)
 
-# CYK
-cykTable = cyk.cyk(tokens, chomskyDict)
+    # CYK
+    cykTable = cyk.cyk(tokens, chomskyDict)
 
-for row in cykTable:
-    print(row)
+    for row in cykTable:
+        print(row)
 
-if(cyk.verdict(cykTable) and isConditionValid):
-    print("Accepted")
+    if(cyk.verdict(cykTable) and isConditionValid):
+        print("Accepted")
+    else:
+        print("Syntax Error")
 else:
-    print("Syntax Error")
+    print("Error, please input file name")
