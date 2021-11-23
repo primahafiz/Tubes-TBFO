@@ -2,6 +2,11 @@ import lexer
 import cyk
 import sys
 
+if len(sys.argv) > 1:
+    path = str(sys.argv[1])
+else:
+    path = 'cfg.txt'
+    
 # Load Chomsky Normal Form
 chomskyDict = cyk.LoadCNF("cnf.txt")
 
