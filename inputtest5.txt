@@ -1,2 +1,0 @@
-with open("helloworld.txt", "w") as f:
-    f.write("Hello, World!")

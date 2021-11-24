@@ -1,5 +1,0 @@
-while (i!=10 and a<5):
-    i+=1
-    a+=1
-    if sum(a)==-1:
-        break
