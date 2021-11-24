@@ -8,14 +8,12 @@ if len(sys.argv) > 1:
     # Load Chomsky Normal Form
     chomskyDict = cyk.LoadCNF("cnf.txt")
 
-    print(chomskyDict)
-    print(len(chomskyDict))
+    # print(chomskyDict)
+    # print(len(chomskyDict))
 
     # Tokenize
     tokens = lexer.main_parser(path)
 
-    print(tokens)
-    print(len(tokens))
     print("abis tokenized")
 
 
