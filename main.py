@@ -14,17 +14,11 @@ if len(sys.argv) > 1:
     # Tokenize
     tokens = lexer.main_parser(path)
 
-    print("abis tokenized")
-
-
     # Validasi if elif else
     isConditionValid=lexer.conditional_validation(tokens)
 
     # CYK
     cykTable = cyk.cyk(tokens, chomskyDict)
-
-    for row in cykTable:
-        print(row)
 
     if(cyk.verdict(cykTable) and isConditionValid):
         print("Accepted")
