@@ -2,7 +2,7 @@ import re
 
 terminal=["True", "False", "variable", "class", "is", "return", "None", "continue", "pass", "break", "for", "def", "from", "import", "while", "and", "or", "not", "with", "as", "if", "elif", "else", "range", "print", "open", "in", "raise", "space", "string", "number", "+", "-", "*", "/", "=", "(", ")", ">", "<", "%", ":", "'", '"', ",", ".", "[", "]", "&", "|", "^", "~", "!"]
 lowercase=['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z']
-uppercase=['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T,','U','V','W','X','Y','Z']
+uppercase=['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z']
 number=['1','2','3','4','5','6','7','8','9','0']
 
 def conditional_validation(lines):
@@ -66,7 +66,7 @@ def is_comment(arr,startpos,endpos):
         pos=endpos-1
         for i in range(startpos+1,endpos):
             if(arr[i]=='\n'):
-                pos=i
+                pos=i-1
                 return pos
         return pos
     else:

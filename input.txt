@@ -1,8 +1,32 @@
-def cek123():
-    for i in range(3):
-        print(1)
-    x=2
-    if (x>=3):
-        return True
-    else:
-        return False
+import lexer
+import cyk
+import sys
+
+
+# Load Chomsky Normal Form
+chomskyDict = cyk.LoadCNF("cnf.txt")
+
+print(chomskyDict)
+print(len(chomskyDict))
+
+# Tokenize
+tokens = lexer.main_parser(path)
+
+print(tokens)
+print(len(tokens))
+print("abis tokenized")
+
+
+# Validasi if elif else
+isConditionValid=lexer.conditional_validation(tokens)
+
+# CYK
+cykTable = cyk.cyk(tokens, chomskyDict)
+
+for row in cykTable:
+    print(row)
+
+if(cyk.verdict(cykTable) and isConditionValid):
+    print("Accepted")
+else:
+    print("Syntax Error")
