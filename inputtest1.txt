@@ -1,1 +1,11 @@
-import matplotlib.pyplot
+class animal:
+    def __init__(self, species, name, age):
+        self.species = species
+        self.name = name
+        self.age = age
+
+    species = 'apa'
+    name = 'apa'
+    age = 10
+
+hwn1 = animal('anjing','heli',1)
