@@ -21,7 +21,6 @@ def LoadCNF(cnfPath): # mengembalikan dictionary {Body : [head1, head2, ..]}
 
 def cyk(tokens, chomskyDict):
     n = len(tokens)
-    print(n)
     cykTable = [[set() for j in range(n-i)] for i in range(n)]
 
     #inisialisasi cykTable[0] berisi variable dengan ruas kanan rule terminal i
