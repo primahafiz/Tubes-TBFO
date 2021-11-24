@@ -1,7 +1,6 @@
 x=2
-if x>3:
-    if (x>5):
-        x+=1
+if (x>5):
+    x+=1
     elif x>2:
         x+=2
     else:

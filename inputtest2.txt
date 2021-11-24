@@ -1,10 +1,1 @@
-for line in lines:
-    for content in line:
-        if (content==1):
-            content+=3
-        else:
-            continue
-
-for i in range(len(lst)):
-    lst+=i
-    print(lst)
+# cek123
