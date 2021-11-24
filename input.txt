@@ -1,5 +1,0 @@
-x = 4 & 2 # halo ini komen
-x = 4 | 2 
-''' ini multiline
-komen '''
-x = 4 ^ 2
