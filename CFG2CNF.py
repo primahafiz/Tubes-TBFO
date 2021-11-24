@@ -2,7 +2,7 @@ import sys
 
 T = []
 V = []
-R = [[]]
+R = []
 leftR = []
 hash = {}
 I = 0
