@@ -46,4 +46,7 @@ def cyk(tokens, chomskyDict):
     return cykTable
 
 def verdict(cykTable):
-    return ('S' in cykTable[-1][0])
+    try:
+        return ('S' in cykTable[-1][0])
+    except IndexError:
+        return False
