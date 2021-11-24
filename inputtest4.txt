@@ -1,0 +1,8 @@
+y = 0
+if x < 0:
+    raise Exception("Number is negative")
+elif y == 0:
+    raise ZeroDivisionError('Cannot divide number with zero')
+else:
+    x//=y
+    print(x)

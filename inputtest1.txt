@@ -1,0 +1,10 @@
+x=2
+if x>3:
+    if (x>5):
+        x+=1
+    elif x>2:
+        x+=2
+    else:
+        print(x+x**2)
+else:
+    x=1
