@@ -75,7 +75,6 @@ def is_comment(arr,startpos,endpos):
 def is_multilinecomment(arr,startpos,endpos):
     if endpos-startpos > 2:
         if(arr[startpos]=='"' and arr[startpos+1]=='"' and arr[startpos+2]=='"'):
-            print(1)
             state=0
             for i in range(startpos+3,endpos):
                 if arr[i] == '"':

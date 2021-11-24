@@ -17,7 +17,7 @@ print(len(tokens))
 print("abis tokenized")
 
 
-# Validasi if elif else
+''' Validasi if elif else'''
 isConditionValid=lexer.conditional_validation(tokens)
 
 # CYK
