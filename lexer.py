@@ -124,7 +124,7 @@ def main_parser(file):
         loc_string=is_string(lines,pos,len(lines))
         loc_multilinecomment=is_multilinecomment(lines,pos,len(lines))
         if (loc_multilinecomment):
-            lines[pos:loc_multilinecomment+1]=['comment']*1
+            lines[pos:loc_multilinecomment+1]=['multilinecomment']*1
         elif (loc_string):
             lines[pos:loc_string+1]=['string']*1
         elif (loc_comment):
