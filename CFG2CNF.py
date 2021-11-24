@@ -90,21 +90,46 @@ def delRightMoreThanTwo(T,V,R):
                             secondRule = ('V'+ str(I), [])
                             thirdRule = ('V'+ str(I+1), [])
                             three = False
+                        R.remove(rules)
+                        if rules[0] == 'METHOD':
+                            print(rules)
+                            print(firstRule)
+                            print(secondRule)
+                            print(thirdRule)
+                            print(three)
+                            print("***")
                         for i in range (len(rules[1])):
                             if (i < 2):
                                 secondRule[1].append(rules[1][i])
                             elif not three:
                                 thirdRule[1].append(rules[1][i])
-                        R.remove(rules)
-                        if (str(secondRule[1]) in hash):
-                            firstRule[1][0] = hash[str(secondRule[1])]
-                            firstRule[1][1] = 'V' + str(I)
-                            thirdRule = ('V'+ str(I), thirdRule[1])
-                            second = False
+                        if rules[0] == 'METHOD':
+                            print(rules)
+                            print(firstRule)
+                            print(secondRule)
+                            print(thirdRule)
+                            print(three)
+                            print("***")
+                        if not three:
+                            if (str(secondRule[1]) in hash):
+                                firstRule[1][0] = hash[str(secondRule[1])]
+                                firstRule[1][1] = 'V' + str(I)
+                                thirdRule = ('V'+ str(I), thirdRule[1])
+                                second = False
+                            else:
+                                if (secondRule[0] not in leftR):
+                                    hash[str(secondRule[1])] = secondRule[0]
+                                second = True
                         else:
-                            if (secondRule[0] not in leftR):
-                                hash[str(secondRule[1])] = secondRule[0]
                             second = True
+                        if rules[0] == 'METHOD':
+                            print(rules)
+                            print(firstRule)
+                            print(secondRule)
+                            print(thirdRule)
+                            print(second)
+                            print(three)
+                            print("***")
                         if not three:
                             if (str(thirdRule[1]) in hash):
                                 firstRule[1][1] = hash[str(thirdRule[1])]
@@ -113,6 +138,14 @@ def delRightMoreThanTwo(T,V,R):
                                 if (thirdRule[0] not in leftR):
                                     hash[str(thirdRule[1])] = thirdRule[0]
                                 third = True
+                        if rules[0] == 'METHOD':
+                            print(rules)
+                            print(firstRule)
+                            print(secondRule)
+                            print(thirdRule)
+                            print(three)
+                            print(second)
+                            print("***")
                         R.append(firstRule)
                         if second:
                             R.append(secondRule)
